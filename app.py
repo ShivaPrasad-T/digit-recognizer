@@ -1,6 +1,6 @@
 import streamlit as st
 import numpy as np
-from PIL import Image, ImageOps, ImageFilter
+from PIL import Image, ImageOps
 from tensorflow.keras.models import load_model
 from streamlit_drawable_canvas import st_canvas
 
@@ -57,13 +57,10 @@ if canvas_result.image_data is not None:
     # Convert to grayscale
     img = ImageOps.grayscale(img)
 
-    # Resize to 28x28 using new Pillow resampling
+    # Resize to 28x28 using Pillow resampling
     img = img.resize((28,28), Image.Resampling.LANCZOS)
 
-    # Apply Gaussian blur
-    img = img.filter(ImageFilter.GaussianBlur(radius=1))
-
-    # Show processed image
+    # Show processed image (sharp, no blur)
     st.image(img, caption="Processed Grayscale Image", use_column_width=True)
 
     # Normalize and reshape for model

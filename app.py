@@ -57,8 +57,8 @@ if canvas_result.image_data is not None:
     # Convert to grayscale
     img = ImageOps.grayscale(img)
 
-    # Resize to 28x28
-    img = img.resize((28,28), Image.ANTIALIAS)
+    # Resize to 28x28 using new Pillow resampling
+    img = img.resize((28,28), Image.Resampling.LANCZOS)
 
     # Apply Gaussian blur
     img = img.filter(ImageFilter.GaussianBlur(radius=1))
@@ -83,6 +83,7 @@ if canvas_result.image_data is not None:
     except Exception as e:
         st.error("❌ Prediction failed.")
         st.error(str(e))
+
 
 
 
